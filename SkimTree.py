@@ -504,7 +504,7 @@ def runbbdm(txtfile):
                 fatjetCleanAgainstMu  = anautil.jetcleaning(fatjet_pt200_eta2p5_IDT, mu_pt10_eta2p4_looseID_looseISO, fatjeteta, mueta, fatjetphi, muphi, DRCut)
                 fatjetCleaned = boolutil.logical_AND_List2(fatjetCleanAgainstEle, fatjetCleanAgainstMu)
                 pass_fatjet_index_cleaned = boolutil.WhereIsTrue(fatjetCleaned)
-                if debug_:print "pass_fatjet_index_cleaned = ", pass_fatjet_index_cleaned," nJets =   ",len(fatjetpx)
+                if debug_:print "pass_fatjet_index_cleaned = ", pass_fatjet_index_cleaned," nJets =   ",len(fatjetPx)
 
 
 
