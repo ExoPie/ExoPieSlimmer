@@ -716,14 +716,11 @@ def runbbdm(txtfile):
                 st_THINjetDeepCSV.push_back(ak4deepcsv_[ithinjet])
                 st_THINjetHadronFlavor.push_back(int(ak4flavor_[ithinjet]))
                 st_THINjetCEmEF.push_back(ak4CEmEF_[ithinjet])
-                st_THINjetCHadEF.push_back(ak4CHEF_[ithinjet])
-                st_THINjetNEmEF.push_back(ak4PhEF_[ithinjet])
-                st_THINjetNHadEF.push_back(ak4NHEF_[ithinjet])
-
-
-
-                st_THINjetCMulti.push_back(ak4EleEF_[ithinjet])
-                st_THINjetNMultiplicity.push_back(ak4MuEF_[ithinjet])
+                st_THINjetCHadEF.push_back(ak4CHadEF_[ithinjet])
+                st_THINjetNEmEF.push_back(ak4NEmEF_[ithinjet])
+                st_THINjetNHadEF.push_back(ak4NHadEF_[ithinjet])
+                st_THINjetCMulti.push_back(ak4CMulti_[ithinjet])
+                st_THINjetNMultiplicity.push_back(ak4NMultiplicity_[ithinjet])
                 st_THINjetCorrUnc.push_back(ak4JEC_[ithinjet])
             if debug_:print 'njets: ',len(pass_jet_index_cleaned)
 
