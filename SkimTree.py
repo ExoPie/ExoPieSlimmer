@@ -124,8 +124,8 @@ def TextToList(textfile):
 def jetID_(jetCEmEF,jetCHadEF,jetNEmEF,jetNHadEF,jetCMulti,jetNMultiplicity,Jet_eta):
     NumConst_ = jetCMulti+jetNMultiplicity
     if  (abs(Jet_eta)<=2.7):
-        looseJetID_2016 = (jetNHadEF<0.99 and jetNEmEF<0.99 and NumConst_>1) and ((abs(Jet_eta)<=2.4 and jetCHadEF>0 and jetCMulti>0 and jetCEmEF<0.99) || abs(Jet_eta)>2.4) and abs(Jet_eta)<=2.7
-        tightJetID_2017 = (jetNHadEF<0.90 and jetNEmEF<0.90 and NumConst_>1) and ((abs(Jet_eta)<=2.4 and jetCHadEF>0 and jetCMulti>0) || abs(Jet_eta)>2.4) and abs(Jet_eta)<=2.7
+        looseJetID_2016 = (jetNHadEF<0.99 and jetNEmEF<0.99 and NumConst_>1) and ((abs(Jet_eta)<=2.4 and jetCHadEF>0 and jetCMulti>0 and jetCEmEF<0.99) or abs(Jet_eta)>2.4) and abs(Jet_eta)<=2.7
+        tightJetID_2017 = (jetNHadEF<0.90 and jetNEmEF<0.90 and NumConst_>1) and ((abs(Jet_eta)<=2.4 and jetCHadEF>0 and jetCMulti>0) or abs(Jet_eta)>2.4) and abs(Jet_eta)<=2.7
     elif (abs(Jet_eta)>2.7 and abs(Jet_eta)<= 3.0):
         looseJetID_2016 = (jetNHadEF<0.98 and jetNEmEF>0.01 and jetNMultiplicity>2 and abs(Jet_eta)>2.7 and abs(Jet_eta)<=3.0 )
         tightJetID_2017 = (jetNEmEF<0.99 and jetNEmEF>0.02 and jetNMultiplicity>2 and abs(Jet_eta)>2.7 and abs(Jet_eta)<=3.0 )
