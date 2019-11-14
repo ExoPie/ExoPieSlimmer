@@ -121,6 +121,19 @@ def TextToList(textfile):
 ## the input file list and key is caught in one variable as a python list,
 #### first element is the list of rootfiles
 #### second element is the key, user to name output.root
+def jetID_(jetCEmEF,jetCHadEF,jetNEmEF,jetNHadEF,jetCMulti,jetNMultiplicity,Jet_eta):
+    NumConst_ = jetCMulti+jetNMultiplicity
+    if  (abs(Jet_eta)<=2.7):
+        looseJetID_2016 = (jetNHadEF<0.99 and jetNEmEF<0.99 and NumConst_>1) and ((abs(Jet_eta)<=2.4 and jetCHadEF>0 and jetCMulti>0 and jetCEmEF<0.99) || abs(Jet_eta)>2.4) and abs(Jet_eta)<=2.7
+        tightJetID_2017 = (jetNHadEF<0.90 and jetNEmEF<0.90 and NumConst_>1) and ((abs(Jet_eta)<=2.4 and jetCHadEF>0 and jetCMulti>0) || abs(Jet_eta)>2.4) and abs(Jet_eta)<=2.7
+    elif (abs(Jet_eta)>2.7 and abs(Jet_eta)<= 3.0):
+        looseJetID_2016 = (jetNHadEF<0.98 and jetNEmEF>0.01 and jetNMultiplicity>2 and abs(Jet_eta)>2.7 and abs(Jet_eta)<=3.0 )
+        tightJetID_2017 = (jetNEmEF<0.99 and jetNEmEF>0.02 and jetNMultiplicity>2 and abs(Jet_eta)>2.7 and abs(Jet_eta)<=3.0 )
+    elif (abs(Jet_eta)>3.0):
+        looseJetID_2016 = (jetNEmEF<0.90 and jetNMultiplicity>10 and abs(Jet_eta)>3.0 )
+        tightJetID_2017 = (jetNEmEF<0.90 and jetNHadEF >0.02 and jetNMultiplicity>10 and abs(Jet_eta)>3.0 )
+    return looseJetID_2016,tightJetID_2017
+
 
 def runbbdm(txtfile):
     infile_=[]
@@ -295,7 +308,7 @@ def runbbdm(txtfile):
     outTree.Branch( 'st_genParPt', st_genParPt, )
     outTree.Branch( 'st_genParSample', st_genParSample )
 
-   
+
     outTree.Branch( 'WenuRecoil', WenuRecoil, 'WenuRecoil/F')
     outTree.Branch( 'Wenumass', Wenumass, 'Wenumass/F')
     outTree.Branch( 'WenuPhi', WenuPhi, 'WenuPhi/F')
@@ -314,7 +327,7 @@ def runbbdm(txtfile):
     '''
     outTree.Branch( 'GammaRecoil', GammaRecoil, 'GammaRecoil/F')
     outTree.Branch( 'GammaPhi', GammaPhi, 'GammaPhi/F')
-    ''' 
+    '''
 
     # trigger status branches
     outTree.Branch( 'st_eletrigdecision', st_eletrigdecision , 'st_eletrigdecision/O')
@@ -346,8 +359,7 @@ def runbbdm(txtfile):
                        df.disc_againstMuonLoose3,df.disc_againstMuonTight3,df.disc_againstElectronLooseMVA6,df.disc_againstElectronMediumMVA6,df.disc_againstElectronTightMVA6,\
                        df.nGenPar,df.genParId,df.genMomParId,df.genParSt,df.genParPx,df.genParPy,df.genParPz,df.genParE,\
                        df.THINnJet,df.THINjetPx,df.THINjetPy,df.THINjetPz,df.THINjetEnergy,\
-                       df.THINjetPassIDLoose,df.THINjetDeepCSV_b,df.THINjetHadronFlavor,df.THINjetNHadEF,df.THINjetCHadEF,\
-                       df.THINjetCEmEF,df.THINjetPhoEF,df.THINjetEleEF,df.THINjetMuoEF,df.THINjetCorrUncUp,df.THINjetNPV, \
+                       df.THINjetPassIDLoose,df.THINjetDeepCSV_b,df.THINjetHadronFlavor,df.THINjetCEmEF,df.THINjetCHadEF,df.THINjetNEmEF,df.THINjetNHadEF,df.THINjetCMulti,df.THINjetNMultiplicity,df.THINjetCorrUncUp,df.THINjetNPV, \
                        df.FATnJet, df.FATjetPx, df.FATjetPy, df.FATjetPz, df.FATjetEnergy, df.FATjetPassIDLoose,\
                        df.FATjet_DoubleSV, df.FATjet_probQCDb, df.FATjet_probHbb, df.FATjet_probQCDc, df.FATjet_probHcc, df.FATjet_probHbbc,\
                        df.FATjet_prob_bbvsLight, df.FATjet_prob_ccvsLight, df.FATjet_prob_TvsQCD, df.FATjet_prob_WvsQCD, df.FATjet_prob_ZHbbvsQCD,\
@@ -364,8 +376,7 @@ def runbbdm(txtfile):
                        df.disc_againstMuonLoose3,df.disc_againstMuonTight3,df.disc_againstElectronLooseMVA6,df.disc_againstElectronMediumMVA6,df.disc_againstElectronTightMVA6,\
                        df.nGenPar,df.genParId,df.genMomParId,df.genParSt,df.genParPx,df.genParPy,df.genParPz,df.genParE,\
                        df.THINnJet,df.THINjetPx,df.THINjetPy,df.THINjetPz,df.THINjetEnergy,\
-                       df.THINjetPassIDTight,df.THINjetDeepCSV_b,df.THINjetHadronFlavor,df.THINjetNHadEF,df.THINjetCHadEF,\
-                       df.THINjetCEmEF,df.THINjetPhoEF,df.THINjetEleEF,df.THINjetMuoEF,df.THINjetCorrUncUp,df.THINjetNPV, \
+                       df.THINjetPassIDTight,df.THINjetDeepCSV_b,df.THINjetHadronFlavor,df.THINjetCEmEF,df.THINjetCHadEF,df.THINjetNEmEF,df.THINjetNHadEF,df.THINjetCMulti,df.THINjetNMultiplicity,df.THINjetCorrUncUp,df.THINjetNPV, \
                        df.FATnJet, df.FATjetPx, df.FATjetPy, df.FATjetPz, df.FATjetEnergy, df.FATjetPassIDTight,\
                        df.FATjet_DoubleSV, df.FATjet_probQCDb, df.FATjet_probHbb, df.FATjet_probQCDc, df.FATjet_probHcc, df.FATjet_probHbbc,\
                        df.FATjet_prob_bbvsLight, df.FATjet_prob_ccvsLight, df.FATjet_prob_TvsQCD, df.FATjet_prob_WvsQCD, df.FATjet_prob_ZHbbvsQCD,\
@@ -381,8 +392,7 @@ def runbbdm(txtfile):
                 Taudisc_againstLooseMuon,Taudisc_againstTightMuon,Taudisc_againstLooseElectron,Taudisc_againstMediumElectron,Taudisc_againstTightElectron,\
                 nGenPar_,genParId_,genMomParId_,genParSt_,genpx_,genpy_,genpz_,gene_,\
                 nak4jet_,ak4px_,ak4py_,ak4pz_,ak4e_,\
-                ak4PassID_,ak4deepcsv_,ak4flavor_,ak4NHEF_,ak4CHEF_,\
-                ak4CEmEF_,ak4PhEF_,ak4EleEF_,ak4MuEF_, ak4JEC_, ak4NPV_,\
+                ak4PassID_,ak4deepcsv_,ak4flavor_,ak4CEmEF_,ak4CHadEF_,ak4NEmEF_,ak4NHadEF_,ak4CMulti_,ak4NMultiplicity_, ak4JEC_, ak4NPV_,\
                 fatnJet, fatjetPx, fatjetPy, fatjetPz, fatjetEnergy,fatjetPassID,\
                 fatjet_DoubleSV, fatjet_probQCDb, fatjet_probHbb, fatjet_probQCDc, fatjet_probHcc, fatjet_probHbbc,\
                 fatjet_prob_bbvsLight, fatjet_prob_ccvsLight, fatjet_prob_TvsQCD, fatjet_prob_WvsQCD, fatjet_prob_ZHbbvsQCD,\
@@ -506,6 +516,10 @@ def runbbdm(txtfile):
             ak4pt = [getPt(ak4px_[ij], ak4py_[ij]) for ij in range(nak4jet_)]
             ak4eta = [getEta(ak4px_[ij], ak4py_[ij], ak4pz_[ij]) for ij in range(nak4jet_)]
             ak4phi = [getPhi(ak4px_[ij], ak4py_[ij]) for ij in range(nak4jet_)]
+            if runOn2016:
+                ak4PassID_Calc = [jetID_(ak4CEmEF_[ij],ak4CHadEF_[ij],ak4NEmEF_[ij],ak4NHadEF_[ij],ak4CMulti_[ij],ak4NMultiplicity_[ij],ak4eta[ij])[0] for ij in range(nak4jet_)]
+            if runOn2017:
+                ak4PassID_Calc = [jetID_(ak4CEmEF_[ij],ak4CHadEF_[ij],ak4NEmEF_[ij],ak4NHadEF_[ij],ak4CMulti_[ij],ak4NMultiplicity_[ij],ak4eta[ij])[1] for ij in range(nak4jet_)]
 
             ak4_pt30_eta4p5_IDT  = [ ( (ak4pt[ij] > 30.0) and (abs(ak4eta[ij]) < 4.5) and (ak4PassID_[ij] ) ) for ij in range(nak4jet_)]
 
