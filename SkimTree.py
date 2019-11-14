@@ -111,7 +111,7 @@ def whichsample(filename):
         sample = 6
     elif "WJetsToLNu_HT" in filename:
         sample = 24
-    elif "ZJetsToNuNu_HT" in filename:
+    elif "ZJetsToNuNu_HT" in filename or "DYJetsToLL" in filename:
         sample = 23
     return sample
 
@@ -216,9 +216,9 @@ def runbbdm(txtfile):
     outTree.Branch( 'st_THINjetCHadEF',st_THINjetCHadEF )
 
     outTree.Branch( 'st_THINjetCEmEF',st_THINjetCEmEF )
-    outTree.Branch( 'st_THINjetPhoEF',st_THINjetPhoEF )
-    outTree.Branch( 'st_THINjetEleEF',st_THINjetEleEF )
-    outTree.Branch( 'st_THINjetMuoEF',st_THINjetMuoEF )
+    outTree.Branch( 'st_THINjetNEmEF',st_THINjetNEmEF )
+    outTree.Branch( 'st_THINjetCMulti',st_THINjetCMulti )
+    outTree.Branch( 'st_THINjetNMultiplicity',st_THINjetNMultiplicity )
     outTree.Branch('st_THINjetCorrUnc', st_THINjetCorrUnc)
 
 
@@ -398,7 +398,7 @@ def runbbdm(txtfile):
                 fatjet_prob_bbvsLight, fatjet_prob_ccvsLight, fatjet_prob_TvsQCD, fatjet_prob_WvsQCD, fatjet_prob_ZHbbvsQCD,\
                 fatjetSDmass, fatN2_Beta1_, fatN2_Beta2_, fatjetCHSPRmassL2L3Corr, fatjetCHSSDmassL2L3Corr\
                 in var_zip:
-            if debug_: print len(trigName_),len(trigResult_),len(filterName),len(filterResult),len(metUnc_), len(elepx_), len(elepy_), len(elepz_), len(elee_), len(elevetoid_), len(elelooseid_), len(eletightid_), len(eleCharge_), npho_,len(phopx_), len(phopy_), len(phopz_), len(phoe_), len(pholooseid_), len(photightID_), nmu_, len(mupx_), len(mupy_), len(mupz_), len(mue_), len(mulooseid_), len(mutightid_), len(muisoloose), len(muisomedium), len(muisotight), len(muisovtight), len(muCharge_), nTau_, len(tau_px_), len(tau_py_), len(tau_pz_), len(tau_e_), len(tau_dm_), len(tau_isLoose_), len(genParId_), len(genMomParId_), len(genParSt_), len(genpx_), len(genpy_), len(genpz_), len(gene_), len(ak4px_), len(ak4py_), len(ak4pz_), len(ak4e_), len(ak4PassID_), len(ak4deepcsv_), len(ak4flavor_), len(ak4NHEF_), len(ak4CHEF_), len(ak4CEmEF_), len(ak4PhEF_), len(ak4EleEF_), len(ak4MuEF_), len(ak4JEC_), len(fatjetPx), len(fatjetPy), len(fatjetPz), len(fatjetEnergy), len(fatjetPassID), len(fatjet_DoubleSV), len(fatjet_probQCDb), len(fatjet_probHbb), len(fatjet_probQCDc), len(fatjet_probHcc), len(fatjet_probHbbc), len(fatjet_prob_bbvsLight), len(fatjet_prob_ccvsLight), len(fatjet_prob_TvsQCD), len(fatjet_prob_WvsQCD), len(fatjet_prob_ZHbbvsQCD), len(fatjetSDmass), len(fatN2_Beta1_), len(fatN2_Beta2_), len(fatjetCHSPRmassL2L3Corr), len(fatjetCHSSDmassL2L3Corr)
+            if debug_: print len(trigName_),len(trigResult_),len(filterName),len(filterResult),len(metUnc_), len(elepx_), len(elepy_), len(elepz_), len(elee_), len(elevetoid_), len(elelooseid_), len(eletightid_), len(eleCharge_), npho_,len(phopx_), len(phopy_), len(phopz_), len(phoe_), len(pholooseid_), len(photightID_), nmu_, len(mupx_), len(mupy_), len(mupz_), len(mue_), len(mulooseid_), len(mutightid_), len(muisoloose), len(muisomedium), len(muisotight), len(muisovtight), len(muCharge_), nTau_, len(tau_px_), len(tau_py_), len(tau_pz_), len(tau_e_), len(tau_dm_), len(tau_isLoose_), len(genParId_), len(genMomParId_), len(genParSt_), len(genpx_), len(genpy_), len(genpz_), len(gene_), len(ak4px_), len(ak4py_), len(ak4pz_), len(ak4e_), len(ak4PassID_), len(ak4deepcsv_), len(ak4flavor_),len(ak4CEmEF_),len(ak4CHadEF_),len(ak4NEmEF_),len(ak4NHadEF_),len(ak4CMulti_),len(ak4NMultiplicity_), len(ak4JEC_), len(fatjetPx), len(fatjetPy), len(fatjetPz), len(fatjetEnergy), len(fatjetPassID), len(fatjet_DoubleSV), len(fatjet_probQCDb), len(fatjet_probHbb), len(fatjet_probQCDc), len(fatjet_probHcc), len(fatjet_probHbbc), len(fatjet_prob_bbvsLight), len(fatjet_prob_ccvsLight), len(fatjet_prob_TvsQCD), len(fatjet_prob_WvsQCD), len(fatjet_prob_ZHbbvsQCD), len(fatjetSDmass), len(fatN2_Beta1_), len(fatN2_Beta2_), len(fatjetCHSPRmassL2L3Corr), len(fatjetCHSSDmassL2L3Corr)
 
             if ieve%1000==0: print "Processed",ieve,"Events"
             ieve = ieve + 1
@@ -635,9 +635,9 @@ def runbbdm(txtfile):
             st_THINjetCHadEF.clear()
 
             st_THINjetCEmEF.clear()
-            st_THINjetPhoEF.clear()
-            st_THINjetEleEF.clear()
-            st_THINjetMuoEF.clear()
+            st_THINjetNEmEF.clear()
+            st_THINjetCMulti.clear()
+            st_THINjetNMultiplicity.clear()
             st_THINjetCorrUnc.clear()
 
 
@@ -715,13 +715,15 @@ def runbbdm(txtfile):
                 st_THINjetEnergy.push_back(ak4e_[ithinjet])
                 st_THINjetDeepCSV.push_back(ak4deepcsv_[ithinjet])
                 st_THINjetHadronFlavor.push_back(int(ak4flavor_[ithinjet]))
-                st_THINjetNHadEF.push_back(ak4NHEF_[ithinjet])
-                st_THINjetCHadEF.push_back(ak4CHEF_[ithinjet])
-
                 st_THINjetCEmEF.push_back(ak4CEmEF_[ithinjet])
-                st_THINjetPhoEF.push_back(ak4PhEF_[ithinjet])
-                st_THINjetEleEF.push_back(ak4EleEF_[ithinjet])
-                st_THINjetMuoEF.push_back(ak4MuEF_[ithinjet])
+                st_THINjetCHadEF.push_back(ak4CHEF_[ithinjet])
+                st_THINjetNEmEF.push_back(ak4PhEF_[ithinjet])
+                st_THINjetNHadEF.push_back(ak4NHEF_[ithinjet])
+
+
+
+                st_THINjetCMulti.push_back(ak4EleEF_[ithinjet])
+                st_THINjetNMultiplicity.push_back(ak4MuEF_[ithinjet])
                 st_THINjetCorrUnc.push_back(ak4JEC_[ithinjet])
             if debug_:print 'njets: ',len(pass_jet_index_cleaned)
 
