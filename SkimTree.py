@@ -28,6 +28,7 @@ import variables as branches
 import filters as filters
 import genPtProducer as GenPtProd
 
+from TheaCorrection import TheaCorrection
 ## from commonutils
 if isCondor:sys.path.append('ExoPieUtils/commonutils/')
 else:sys.path.append('../ExoPieUtils/commonutils/')
@@ -239,6 +240,7 @@ def runbbdm(txtfile):
     outTree.Branch( 'st_fjetProbWvsQCD',st_fjetProbWvsQCD)
     outTree.Branch( 'st_fjetProbZHbbvsQCD',st_fjetProbZHbbvsQCD)
     outTree.Branch( 'st_fjetSDMass',st_fjetSDMass)
+    outTree.Branch( 'st_fjetSDMassCorrFact',st_fjetSDMassCorrFact)
     outTree.Branch( 'st_fjetN2b1',st_fjetN2b1)
     outTree.Branch( 'st_fjetN2b2',st_fjetN2b2)
     outTree.Branch( 'st_fjetCHSPRMass',st_fjetCHSPRMass)
@@ -275,10 +277,10 @@ def runbbdm(txtfile):
     #outTree.Branch( 'st_HPSTau_n', st_HPSTau_n, 'st_HPSTau_n/L')
     outTree.Branch( 'st_nTau_DRBased_EleMuVeto',st_nTau_DRBased_EleMuVeto,'st_nTau_DRBased_EleMuVeto/L')
     outTree.Branch( 'st_nTau_discBased_looseElelooseMuVeto',st_nTau_discBased_looseElelooseMuVeto,'st_nTau_discBased_looseElelooseMuVeto/L')
-    outTree.Branch( 'st_nTau_discBased_looseEletightMuVeto',st_nTau_discBased_looseEletightMuVeto,'st_nTau_discBased_looseEletightMuVeto/L')
+    outTree.Branch( 'st_nTau_discBased_looseEleTightMuVeto',st_nTau_discBased_looseEleTightMuVeto,'st_nTau_discBased_looseEleTightMuVeto/L')
     outTree.Branch( 'st_nTau_discBased_mediumElelooseMuVeto',st_nTau_discBased_mediumElelooseMuVeto,'st_nTau_discBased_mediumElelooseMuVeto/L')
-    outTree.Branch( 'st_nTau_discBased_tightElelooseMuVeto',st_nTau_discBased_tightElelooseMuVeto,'st_nTau_discBased_tightElelooseMuVeto/L')
-    outTree.Branch( 'st_nTau_discBased_tightEletightMuVeto',st_nTau_discBased_tightEletightMuVeto,'st_nTau_discBased_tightEletightMuVeto/L')
+    outTree.Branch( 'st_nTau_discBased_TightElelooseMuVeto',st_nTau_discBased_TightElelooseMuVeto,'st_nTau_discBased_TightElelooseMuVeto/L')
+    outTree.Branch( 'st_nTau_discBased_TightEleTightMuVeto',st_nTau_discBased_TightEleTightMuVeto,'st_nTau_discBased_TightEleTightMuVeto/L')
 
     '''
     outTree.Branch( 'st_Taudisc_againstLooseMuon', st_Taudisc_againstLooseMuon)
@@ -453,6 +455,7 @@ def runbbdm(txtfile):
             if filterdecision == False: continue
 
 
+            if isData:print 'isData',isData
 
             # ------------------------------------------------------
             ## PFMET Selection
@@ -548,7 +551,8 @@ def runbbdm(txtfile):
             fatjetpt = [getPt(fatjetPx[ij], fatjetPy[ij]) for ij in range(fatnJet)]
             fatjeteta = [getEta(fatjetPx[ij], fatjetPy[ij], fatjetPz[ij]) for ij in range(fatnJet)]
             fatjetphi = [getPhi(fatjetPx[ij], fatjetPy[ij]) for ij in range(fatnJet)]
-
+            SDMassCorrFact = [TheaCorrection(fatjetpt[ij],fatjeteta[ij]) for ij in range(fatnJet)]
+            print 'SDMassCorrFact',SDMassCorrFact
             fatjet_pt200_eta2p5_IDT  = [ ( (fatjetpt[ij] > 200.0) and (abs(fatjeteta[ij]) < 2.5) and (fatjetPassID[ij] ) ) for ij in range(fatnJet)]
 
             ##--- fat jet cleaning
@@ -558,8 +562,8 @@ def runbbdm(txtfile):
 
 
             if len(fatjet_pt200_eta2p5_IDT) > 0:
-                fatjetCleanAgainstEle = anautil.jetcleaning(fatjet_pt200_eta2p5_IDT, ele_pt10_eta2p5_vetoID, fatjeteta, eleeta, fatjetphi, elephi, DRCut)
-                fatjetCleanAgainstMu  = anautil.jetcleaning(fatjet_pt200_eta2p5_IDT, mu_pt10_eta2p4_looseID_looseISO, fatjeteta, mueta, fatjetphi, muphi, DRCut)
+                fatjetCleanAgainstEle = anautil.jetcleaning(fatjet_pt200_eta2p5_IDT, ele_pt10_eta2p5_vetoID, fatjeteta, eleeta, fatjetphi, elephi, 0.8)
+                fatjetCleanAgainstMu  = anautil.jetcleaning(fatjet_pt200_eta2p5_IDT, mu_pt10_eta2p4_looseID_looseISO, fatjeteta, mueta, fatjetphi, muphi, 0.8)
                 fatjetCleaned = boolutil.logical_AND_List3(fatjet_pt200_eta2p5_IDT, fatjetCleanAgainstEle, fatjetCleanAgainstMu)
                 pass_fatjet_index_cleaned = boolutil.WhereIsTrue(fatjetCleaned)
                 if debug_:print "pass_fatjet_index_cleaned = ", pass_fatjet_index_cleaned," nJets =   ",len(fatjetpx)
@@ -658,6 +662,7 @@ def runbbdm(txtfile):
             st_fjetProbWvsQCD.clear()
             st_fjetProbZHbbvsQCD.clear()
             st_fjetSDMass.clear()
+            st_fjetSDMassCorrFact.clear()
             st_fjetN2b1.clear()
             st_fjetN2b2.clear()
             st_fjetCHSPRMass.clear()
@@ -742,6 +747,7 @@ def runbbdm(txtfile):
                 st_fjetProbWvsQCD.push_back(fatjet_prob_WvsQCD[ifjet])
                 st_fjetProbZHbbvsQCD.push_back(fatjet_prob_ZHbbvsQCD[ifjet])
                 st_fjetSDMass.push_back(fatjetSDmass[ifjet])
+                st_fjetSDMassCorrFact.push_back(SDMassCorrFact[ifjet])
                 st_fjetN2b1.push_back(fatN2_Beta1_[ifjet])
                 st_fjetN2b2.push_back(fatN2_Beta2_[ifjet])
                 st_fjetCHSPRMass.push_back(fatjetCHSPRmassL2L3Corr[ifjet])
@@ -772,10 +778,10 @@ def runbbdm(txtfile):
 
             st_nTau_DRBased_EleMuVeto[0] = len(pass_tau_index_cleaned_DRBased)
             st_nTau_discBased_looseElelooseMuVeto[0]    = len(tau_eta2p3_iDLdm_pt18_looseEleVeto_looseMuVeto_index)
-            st_nTau_discBased_looseEletightMuVeto[0]    = len(tau_eta2p3_iDLdm_pt18_looseEleVeto_tightMuVeto_index)
+            st_nTau_discBased_looseEleTightMuVeto[0]    = len(tau_eta2p3_iDLdm_pt18_looseEleVeto_tightMuVeto_index)
             st_nTau_discBased_mediumElelooseMuVeto[0]   = len(tau_eta2p3_iDLdm_pt18_mediumEleVeto_looseMuVeto_index)
-            st_nTau_discBased_tightElelooseMuVeto[0]    = len(tau_eta2p3_iDLdm_pt18_tightEleVeto_looseMuVeto_index)
-            st_nTau_discBased_tightEletightMuVeto[0]    = len(tau_eta2p3_iDLdm_pt18_tightEleVeto_tightMuVeto_index)
+            st_nTau_discBased_TightElelooseMuVeto[0]    = len(tau_eta2p3_iDLdm_pt18_tightEleVeto_looseMuVeto_index)
+            st_nTau_discBased_TightEleTightMuVeto[0]    = len(tau_eta2p3_iDLdm_pt18_tightEleVeto_tightMuVeto_index)
             if debug_:print 'nTau: ',len(pass_tau_index_cleaned_DRBased)
             #print 'nTau: ',len(pass_tau_index_cleaned_DRBased),'event',event
             '''
