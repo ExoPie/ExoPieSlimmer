@@ -420,7 +420,7 @@ def runbbdm(txtfile):
                 ak4PassID_,ak4deepcsv_,ak4flavor_,ak4CEmEF_,ak4CHadEF_,ak4NEmEF_,ak4NHadEF_,ak4CMulti_,ak4NMultiplicity_, ak4JEC_, ak4NPV_,\
                 fatnJet, fatjetPx, fatjetPy, fatjetPz, fatjetEnergy,\
                 fatCEmEF_,fatCHadEF_,fatNEmEF_,fatNHadEF_,fatCMulti_,fatNMultiplicity_,\
-                fatCEmEF_,fatCHadEF_,fatNEmEF_,fatNHadEF_,fatCMulti_,fatNMultiplicity_\
+                fatCEmEF_,fatCHadEF_,fatNEmEF_,fatNHadEF_,fatCMulti_,fatNMultiplicity_,\
                 fatjet_DoubleSV, fatjet_probQCDb, fatjet_probHbb, fatjet_probQCDc, fatjet_probHcc, fatjet_probHbbc,\
                 fatjet_prob_bbvsLight, fatjet_prob_ccvsLight, fatjet_prob_TvsQCD, fatjet_prob_WvsQCD, fatjet_prob_ZHbbvsQCD,\
                 fatjetSDmass, fatN2_Beta1_, fatN2_Beta2_, fatjetCHSPRmassL2L3Corr, fatjetCHSSDmassL2L3Corr\
