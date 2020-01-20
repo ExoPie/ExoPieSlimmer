@@ -579,7 +579,7 @@ def runbbdm(txtfile):
             fatjetphi = [getPhi(fatjetPx[ij], fatjetPy[ij]) for ij in range(fatnJet)]
             SDMassCorrFact = [TheaCorrection(fatjetpt[ij],fatjeteta[ij]) for ij in range(fatnJet)]
             if runOn2018:
-                fatjetPassID = [jetID_(fatCEmEF_[ij],fatCHadEF_[ij],fatNEmEF_[ij],fatNHadEF_[ij],fatCMulti_[ij],fatNMultiplicity_[ij],fateta[ij])[0] for ij in range(nfatjet_)]
+                fatjetPassID = [jetID_(fatCEmEF_[ij],fatCHadEF_[ij],fatNEmEF_[ij],fatNHadEF_[ij],fatCMulti_[ij],fatNMultiplicity_[ij],fateta[ij])[0] for ij in range(fatnJet)]
 
             fatjet_pt200_eta2p5_IDT  = [ ( (fatjetpt[ij] > 200.0) and (abs(fatjeteta[ij]) < 2.5) and (fatjetPassID[ij] ) ) for ij in range(fatnJet)]
 
