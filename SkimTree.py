@@ -400,7 +400,7 @@ def runbbdm(txtfile):
                        df.disc_againstMuonLoose3,df.disc_againstMuonTight3,df.disc_againstElectronLooseMVA6,df.disc_againstElectronMediumMVA6,df.disc_againstElectronTightMVA6,\
                        df.nGenPar,df.genParId,df.genMomParId,df.genParSt,df.genParPx,df.genParPy,df.genParPz,df.genParE,\
                        df.THINnJet,df.THINjetPx,df.THINjetPy,df.THINjetPz,df.THINjetEnergy,\
-                       df.THINjetPassIDTight,df.THINjetDeepCSV_b,df.THINjetHadronFlavor,df.THINjetCEmEF,df.THINjetCHadEF,df.THINjetNEmEF,df.THINjetNHadEF,df.THINjetCMulti,df.THINjetNMultiplicity,df.THINjetCorrUncUp,df.THINjetNPV, \
+                       df.THINjetDeepCSV_b,df.THINjetHadronFlavor,df.THINjetCEmEF,df.THINjetCHadEF,df.THINjetNEmEF,df.THINjetNHadEF,df.THINjetCMulti,df.THINjetNMultiplicity,df.THINjetCorrUncUp,df.THINjetNPV, \
                        df.FATnJet, df.FATjetPx, df.FATjetPy, df.FATjetPz, df.FATjetEnergy,\
                        df.FATjetCEmEF,df.FATjetCHadEF,df.FATjetNEmEF,df.FATjetNHadEF,df.FATjetCMulti,df.FATjetNMultiplicity,\
                        df.FATjet_DoubleSV, df.FATjet_probQCDb, df.FATjet_probHbb, df.FATjet_probQCDc, df.FATjet_probHcc, df.FATjet_probHbbc,\
@@ -417,7 +417,7 @@ def runbbdm(txtfile):
                 Taudisc_againstLooseMuon,Taudisc_againstTightMuon,Taudisc_againstLooseElectron,Taudisc_againstMediumElectron,Taudisc_againstTightElectron,\
                 nGenPar_,genParId_,genMomParId_,genParSt_,genpx_,genpy_,genpz_,gene_,\
                 nak4jet_,ak4px_,ak4py_,ak4pz_,ak4e_,\
-                ak4PassID_,ak4deepcsv_,ak4flavor_,ak4CEmEF_,ak4CHadEF_,ak4NEmEF_,ak4NHadEF_,ak4CMulti_,ak4NMultiplicity_, ak4JEC_, ak4NPV_,\
+                ak4deepcsv_,ak4flavor_,ak4CEmEF_,ak4CHadEF_,ak4NEmEF_,ak4NHadEF_,ak4CMulti_,ak4NMultiplicity_, ak4JEC_, ak4NPV_,\
                 fatnJet, fatjetPx, fatjetPy, fatjetPz, fatjetEnergy,\
                 fatCEmEF_,fatCHadEF_,fatNEmEF_,fatNHadEF_,fatCMulti_,fatNMultiplicity_,\
                 fatCEmEF_,fatCHadEF_,fatNEmEF_,fatNHadEF_,fatCMulti_,fatNMultiplicity_,\
