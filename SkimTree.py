@@ -50,6 +50,7 @@ import analysis_utils as anautil
 runInteractive = False
 runOn2016 = False
 runOn2017 = False
+runOn2018 = False
 
 ## ----- start if clock
 
@@ -85,6 +86,8 @@ if args.year=='2016':
     runOn2016=True
 elif args.year=='2017':
     runOn2017=True
+elif args.year=='2018':
+    runOn2018=True
 else:
     print('Please provide on which year you want to run?')
 
@@ -179,7 +182,7 @@ def runbbdm(txtfile):
 
     if runOn2016:
         triglist = trig.trigger2016
-    elif runOn2017:
+    elif runOn2017 or runOn2018:
         triglist = trig.trigger2017
     passfilename = open("configs/outfilename.txt","w")
 
@@ -343,6 +346,8 @@ def runbbdm(txtfile):
         jetvariables = branches.allvars2016
     elif runOn2017:
         jetvariables = branches.allvars2017
+    elif runOn2018:
+        jetvariables = branches.allvars2018
 
     filename = infile_
 
@@ -383,6 +388,24 @@ def runbbdm(txtfile):
                        df.FATjet_DoubleSV, df.FATjet_probQCDb, df.FATjet_probHbb, df.FATjet_probQCDc, df.FATjet_probHcc, df.FATjet_probHbbc,\
                        df.FATjet_prob_bbvsLight, df.FATjet_prob_ccvsLight, df.FATjet_prob_TvsQCD, df.FATjet_prob_WvsQCD, df.FATjet_prob_ZHbbvsQCD,\
                        df.FATjetSDmass, df.FATN2_Beta1_, df.FATN2_Beta2_, df.FATjetCHSPRmassL2L3Corr, df.FATjetCHSSDmassL2L3Corr)
+        elif runOn2018:
+            var_zip = zip(df.runId,df.lumiSection,df.eventId,df.isData,df.mcWeight,\
+                       df.pu_nTrueInt,df.pu_nPUVert,\
+                       df.hlt_trigName,df.hlt_trigResult,df.hlt_filterName,df.hlt_filterResult,\
+                       df.pfMetCorrPt,df.pfMetCorrPhi,df.pfMetCorrUnc,\
+                       df.nEle,df.elePx,df.elePy,df.elePz,df.eleEnergy,df.eleIsPassVeto, df.eleIsPassLoose,df.eleIsPassTight,\
+                       df.eleCharge,df.nPho,df.phoPx,df.phoPy,df.phoPz,df.phoEnergy,df.phoIsPassLoose,df.phoIsPassTight,\
+                       df.nMu,df.muPx,df.muPy,df.muPz,df.muEnergy,df.isLooseMuon,df.isTightMuon,df.PFIsoLoose, df.PFIsoMedium, df.PFIsoTight, df.PFIsoVeryTight, df.muCharge,\
+                       df.HPSTau_n,df.HPSTau_Px,df.HPSTau_Py,df.HPSTau_Pz,df.HPSTau_Energy,df.disc_decayModeFinding,df.disc_byLooseIsolationMVArun2017v2DBoldDMwLT2017,df.disc_byMediumIsolationMVArun2017v2DBoldDMwLT2017,df.disc_byTightIsolationMVArun2017v2DBoldDMwLT2017,\
+                       df.disc_againstMuonLoose3,df.disc_againstMuonTight3,df.disc_againstElectronLooseMVA6,df.disc_againstElectronMediumMVA6,df.disc_againstElectronTightMVA6,\
+                       df.nGenPar,df.genParId,df.genMomParId,df.genParSt,df.genParPx,df.genParPy,df.genParPz,df.genParE,\
+                       df.THINnJet,df.THINjetPx,df.THINjetPy,df.THINjetPz,df.THINjetEnergy,\
+                       df.THINjetPassIDTight,df.THINjetDeepCSV_b,df.THINjetHadronFlavor,df.THINjetCEmEF,df.THINjetCHadEF,df.THINjetNEmEF,df.THINjetNHadEF,df.THINjetCMulti,df.THINjetNMultiplicity,df.THINjetCorrUncUp,df.THINjetNPV, \
+                       df.FATnJet, df.FATjetPx, df.FATjetPy, df.FATjetPz, df.FATjetEnergy,\
+                       df.FATjetCEmEF,df.FATjetCHadEF,df.FATjetNEmEF,df.FATjetNHadEF,df.FATjetCMulti,df.FATjetNMultiplicity,\
+                       df.FATjet_DoubleSV, df.FATjet_probQCDb, df.FATjet_probHbb, df.FATjet_probQCDc, df.FATjet_probHcc, df.FATjet_probHbbc,\
+                       df.FATjet_prob_bbvsLight, df.FATjet_prob_ccvsLight, df.FATjet_prob_TvsQCD, df.FATjet_prob_WvsQCD, df.FATjet_prob_ZHbbvsQCD,\
+                       df.FATjetSDmass, df.FATN2_Beta1_, df.FATN2_Beta2_, df.FATjetCHSPRmassL2L3Corr, df.FATjetCHSSDmassL2L3Corr)
         for run,lumi,event,isData,mcWeight_,\
                 pu_nTrueInt_,pu_nPUVert_,\
                 trigName_,trigResult_,filterName,filterResult,\
@@ -395,7 +418,9 @@ def runbbdm(txtfile):
                 nGenPar_,genParId_,genMomParId_,genParSt_,genpx_,genpy_,genpz_,gene_,\
                 nak4jet_,ak4px_,ak4py_,ak4pz_,ak4e_,\
                 ak4PassID_,ak4deepcsv_,ak4flavor_,ak4CEmEF_,ak4CHadEF_,ak4NEmEF_,ak4NHadEF_,ak4CMulti_,ak4NMultiplicity_, ak4JEC_, ak4NPV_,\
-                fatnJet, fatjetPx, fatjetPy, fatjetPz, fatjetEnergy,fatjetPassID,\
+                fatnJet, fatjetPx, fatjetPy, fatjetPz, fatjetEnergy,\
+                fatCEmEF_,fatCHadEF_,fatNEmEF_,fatNHadEF_,fatCMulti_,fatNMultiplicity_,\
+                fatCEmEF_,fatCHadEF_,fatNEmEF_,fatNHadEF_,fatCMulti_,fatNMultiplicity_\
                 fatjet_DoubleSV, fatjet_probQCDb, fatjet_probHbb, fatjet_probQCDc, fatjet_probHcc, fatjet_probHbbc,\
                 fatjet_prob_bbvsLight, fatjet_prob_ccvsLight, fatjet_prob_TvsQCD, fatjet_prob_WvsQCD, fatjet_prob_ZHbbvsQCD,\
                 fatjetSDmass, fatN2_Beta1_, fatN2_Beta2_, fatjetCHSPRmassL2L3Corr, fatjetCHSSDmassL2L3Corr\
@@ -522,6 +547,8 @@ def runbbdm(txtfile):
             if runOn2016:
                 ak4PassID_Calc = [jetID_(ak4CEmEF_[ij],ak4CHadEF_[ij],ak4NEmEF_[ij],ak4NHadEF_[ij],ak4CMulti_[ij],ak4NMultiplicity_[ij],ak4eta[ij])[0] for ij in range(nak4jet_)]
             if runOn2017:
+                ak4PassID_Calc = [jetID_(ak4CEmEF_[ij],ak4CHadEF_[ij],ak4NEmEF_[ij],ak4NHadEF_[ij],ak4CMulti_[ij],ak4NMultiplicity_[ij],ak4eta[ij])[1] for ij in range(nak4jet_)]
+            if runOn2018:
                 ak4PassID_Calc = [jetID_(ak4CEmEF_[ij],ak4CHadEF_[ij],ak4NEmEF_[ij],ak4NHadEF_[ij],ak4CMulti_[ij],ak4NMultiplicity_[ij],ak4eta[ij])[1] for ij in range(nak4jet_)]
 
             ak4_pt30_eta4p5_IDT  = [ ( (ak4pt[ij] > 30.0) and (abs(ak4eta[ij]) < 4.5) and (ak4PassID_Calc[ij] ) ) for ij in range(nak4jet_)]
