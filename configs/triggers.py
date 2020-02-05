@@ -18,7 +18,7 @@ Electrontrigger2016=["HLT_Ele27_WPTight_Gsf_v",
                      "HLT_Ele115_CaloIdVT_GsfTrkIdT_v",
                      "HLT_Ele32_WPTight_Gsf_v",
                      "HLT_IsoMu20_v",
-                     "HLT_Ele27_eta2p1_WPTight_Gsf_v", 
+                     "HLT_Ele27_eta2p1_WPTight_Gsf_v",
                      "HLT_Ele27_WPLoose_Gsf_v",
                      "HLT_Ele32_eta2p1_WPTight_Gsf_v"]
 
@@ -86,12 +86,18 @@ trigger2017 = ["HLT_PFMETNoMu120_PFMHTNoMu120_IDTight_PFHT60",
 
 ##------------- triggers 2018  ------------
 
-METtrigger2018=[]
+METtrigger2018=["HLT_PFMETNoMu120_PFMHTNoMu120_IDTight_PFHT60","HLT_PFMETNoMu120_PFMHTNoMu120_IDTight","HLT_PFMETNoMu140_PFMHTNoMu140_IDTight"]
 
-Photontrigger2018=[]
+Photontrigger2018=["HLT_Photon200"]
 
-Electrontrigger2018=[]
+Electrontrigger2018=["HLT_Ele115_CaloIdVT_GsfTrkIdT","HLT_Ele50_CaloIdVT_GsfTrkIdT_PFJet165","HLT_Ele32_WPTight_Gsf"]
 
-Muontrigger2018=[]
+Muontrigger2018=["HLT_IsoMu24"]
 
-trigger2018 = []
+trigger2018 = ["HLT_PFMETNoMu120_PFMHTNoMu120_IDTight_PFHT60",
+               "HLT_PFMETNoMu120_PFMHTNoMu120_IDTight",
+               "HLT_PFMETNoMu140_PFMHTNoMu140_IDTight",
+               "HLT_IsoMu24",
+               "HLT_Ele115_CaloIdVT_GsfTrkIdT",
+               "HLT_Ele50_CaloIdVT_GsfTrkIdT_PFJet165",
+               "HLT_Ele32_WPTight_Gsf","HLT_Photon200" ]

@@ -182,8 +182,23 @@ def runbbdm(txtfile):
 
     if runOn2016:
         triglist = trig.trigger2016
-    elif runOn2017 or runOn2018:
+        eletrig  = trig.Electrontrigger2016
+        muontrig  = trig.Muontrigger2016
+        mettrig  = trig.METtrigger2016
+        photontrig  = trig.Photontrigger2016
+    elif runOn2017:
         triglist = trig.trigger2017
+        eletrig  = trig.Electrontrigger2017
+        muontrig  = trig.Muontrigger2017
+        mettrig  = trig.METtrigger2017
+        photontrig  = trig.Photontrigger2017
+    elif runOn2018:
+        triglist = trig.trigger2018
+        eletrig  = trig.Electrontrigger2018
+        muontrig  = trig.Muontrigger2018
+        mettrig  = trig.METtrigger2018
+        photontrig  = trig.Photontrigger2018
+
     passfilename = open("configs/outfilename.txt","w")
 
     passfilename.write(outfilename)
