@@ -181,23 +181,23 @@ def runbbdm(txtfile):
     h_total_mcweight = TH1F('h_total_mcweight','h_total_mcweight',2,0,2)
 
     if runOn2016:
-        triglist = trig.trigger2016
-        eletrig  = trig.Electrontrigger2016
-        muontrig  = trig.Muontrigger2016
-        mettrig  = trig.METtrigger2016
-        photontrig  = trig.Photontrigger2016
+        triglist   = trig.trigger2016
+        eletrig    = trig.Electrontrigger2016
+        muontrig   = trig.Muontrigger2016
+        mettrig    = trig.METtrigger2016
+        photontrig = trig.Photontrigger2016
     elif runOn2017:
-        triglist = trig.trigger2017
-        eletrig  = trig.Electrontrigger2017
-        muontrig  = trig.Muontrigger2017
-        mettrig  = trig.METtrigger2017
-        photontrig  = trig.Photontrigger2017
+        triglist   = trig.trigger2017
+        eletrig    = trig.Electrontrigger2017
+        muontrig   = trig.Muontrigger2017
+        mettrig    = trig.METtrigger2017
+        photontrig = trig.Photontrigger2017
     elif runOn2018:
-        triglist = trig.trigger2018
-        eletrig  = trig.Electrontrigger2018
-        muontrig  = trig.Muontrigger2018
-        mettrig  = trig.METtrigger2018
-        photontrig  = trig.Photontrigger2018
+        triglist   = trig.trigger2018
+        eletrig    = trig.Electrontrigger2018
+        muontrig   = trig.Muontrigger2018
+        mettrig    = trig.METtrigger2018
+        photontrig = trig.Photontrigger2018
 
     passfilename = open("configs/outfilename.txt","w")
 
@@ -415,8 +415,8 @@ def runbbdm(txtfile):
                        df.disc_againstMuonLoose3,df.disc_againstMuonTight3,df.disc_againstElectronLooseMVA6,df.disc_againstElectronMediumMVA6,df.disc_againstElectronTightMVA6,\
                        df.nGenPar,df.genParId,df.genMomParId,df.genParSt,df.genParPx,df.genParPy,df.genParPz,df.genParE,\
                        df.THINnJet,df.THINjetPx,df.THINjetPy,df.THINjetPz,df.THINjetEnergy,\
-                       df.THINjetDeepCSV_b,df.THINjetHadronFlavor,df.THINjetCEmEF,df.THINjetCHadEF,df.THINjetNEmEF,df.THINjetNHadEF,df.THINjetCMulti,df.THINjetNMultiplicity,df.THINjetCorrUncUp,df.THINjetNPV, \
-                       df.FATnJet, df.FATjetPx, df.FATjetPy, df.FATjetPz, df.FATjetEnergy,\
+                       df.THINjetPassIDTight,df.THINjetDeepCSV_b,df.THINjetHadronFlavor,df.THINjetCEmEF,df.THINjetCHadEF,df.THINjetNEmEF,df.THINjetNHadEF,df.THINjetCMulti,df.THINjetNMultiplicity,df.THINjetCorrUncUp,df.THINjetNPV, \
+                       df.FATnJet, df.FATjetPx, df.FATjetPy, df.FATjetPz, df.FATjetEnergy,df.FATjetPassIDTight,\
                        df.FATjetCEmEF,df.FATjetCHadEF,df.FATjetNEmEF,df.FATjetNHadEF,df.FATjetCMulti,df.FATjetNMultiplicity,\
                        df.FATjet_DoubleSV, df.FATjet_probQCDb, df.FATjet_probHbb, df.FATjet_probQCDc, df.FATjet_probHcc, df.FATjet_probHbbc,\
                        df.FATjet_prob_bbvsLight, df.FATjet_prob_ccvsLight, df.FATjet_prob_TvsQCD, df.FATjet_prob_WvsQCD, df.FATjet_prob_ZHbbvsQCD,\
@@ -432,8 +432,8 @@ def runbbdm(txtfile):
                 Taudisc_againstLooseMuon,Taudisc_againstTightMuon,Taudisc_againstLooseElectron,Taudisc_againstMediumElectron,Taudisc_againstTightElectron,\
                 nGenPar_,genParId_,genMomParId_,genParSt_,genpx_,genpy_,genpz_,gene_,\
                 nak4jet_,ak4px_,ak4py_,ak4pz_,ak4e_,\
-                ak4deepcsv_,ak4flavor_,ak4CEmEF_,ak4CHadEF_,ak4NEmEF_,ak4NHadEF_,ak4CMulti_,ak4NMultiplicity_, ak4JEC_, ak4NPV_,\
-                fatnJet, fatjetPx, fatjetPy, fatjetPz, fatjetEnergy,\
+                ak4PassID_,ak4deepcsv_,ak4flavor_,ak4CEmEF_,ak4CHadEF_,ak4NEmEF_,ak4NHadEF_,ak4CMulti_,ak4NMultiplicity_, ak4JEC_, ak4NPV_,\
+                fatnJet, fatjetPx, fatjetPy, fatjetPz, fatjetEnergy,fatjetPassID,\
                 fatCEmEF_,fatCHadEF_,fatNEmEF_,fatNHadEF_,fatCMulti_,fatNMultiplicity_,\
                 fatjet_DoubleSV, fatjet_probQCDb, fatjet_probHbb, fatjet_probQCDc, fatjet_probHcc, fatjet_probHbbc,\
                 fatjet_prob_bbvsLight, fatjet_prob_ccvsLight, fatjet_prob_TvsQCD, fatjet_prob_WvsQCD, fatjet_prob_ZHbbvsQCD,\
@@ -463,10 +463,10 @@ def runbbdm(txtfile):
             metdecision=False
             phodecision=False
 
-            eletrigstatus = [( anautil.CheckFilter(trigName_, trigResult_, trig.Electrontrigger2017[itrig] ) ) for itrig in range(len(trig.Electrontrigger2017))]
-            mutrigstatus  = [( anautil.CheckFilter(trigName_, trigResult_, trig.Muontrigger2017[itrig]     ) ) for itrig in range(len(trig.Muontrigger2017))    ]
-            mettrigstatus = [( anautil.CheckFilter(trigName_, trigResult_, trig.METtrigger2017[itrig]       ) ) for itrig in range(len(trig.METtrigger2017))     ]
-            photrigstatus = [( anautil.CheckFilter(trigName_, trigResult_, trig.Photontrigger2017[itrig]   ) ) for itrig in range(len(trig.Photontrigger2017))  ]
+            eletrigstatus = [( anautil.CheckFilter(trigName_, trigResult_, eletrig[itrig] ) ) for itrig in range(len(eletrig))]
+            mutrigstatus  = [( anautil.CheckFilter(trigName_, trigResult_, muontrig[itrig]     ) ) for itrig in range(len(muontrig))    ]
+            mettrigstatus = [( anautil.CheckFilter(trigName_, trigResult_, mettrig[itrig]       ) ) for itrig in range(len(mettrig))     ]
+            photrigstatus = [( anautil.CheckFilter(trigName_, trigResult_, photontrig[itrig]   ) ) for itrig in range(len(photontrig))  ]
 
             eletrigdecision = boolutil.logical_OR(eletrigstatus)
             mutrigdecision  = boolutil.logical_OR(mutrigstatus)
@@ -559,11 +559,15 @@ def runbbdm(txtfile):
             ak4eta = [getEta(ak4px_[ij], ak4py_[ij], ak4pz_[ij]) for ij in range(nak4jet_)]
             ak4phi = [getPhi(ak4px_[ij], ak4py_[ij]) for ij in range(nak4jet_)]
             if runOn2016:
-                ak4PassID_Calc = [jetID_(ak4CEmEF_[ij],ak4CHadEF_[ij],ak4NEmEF_[ij],ak4NHadEF_[ij],ak4CMulti_[ij],ak4NMultiplicity_[ij],ak4eta[ij])[0] for ij in range(nak4jet_)]
+                #ak4PassID_Calc = [jetID_(ak4CEmEF_[ij],ak4CHadEF_[ij],ak4NEmEF_[ij],ak4NHadEF_[ij],ak4CMulti_[ij],ak4NMultiplicity_[ij],ak4eta[ij])[0] for ij in range(nak4jet_)]
+                ak4PassID_Calc = ak4PassID_
             if runOn2017:
-                ak4PassID_Calc = [jetID_(ak4CEmEF_[ij],ak4CHadEF_[ij],ak4NEmEF_[ij],ak4NHadEF_[ij],ak4CMulti_[ij],ak4NMultiplicity_[ij],ak4eta[ij])[1] for ij in range(nak4jet_)]
+                #ak4PassID_Calc = [jetID_(ak4CEmEF_[ij],ak4CHadEF_[ij],ak4NEmEF_[ij],ak4NHadEF_[ij],ak4CMulti_[ij],ak4NMultiplicity_[ij],ak4eta[ij])[1] for ij in range(nak4jet_)]
+                ak4PassID_Calc = ak4PassID_
             if runOn2018:
-                ak4PassID_Calc = [jetID_(ak4CEmEF_[ij],ak4CHadEF_[ij],ak4NEmEF_[ij],ak4NHadEF_[ij],ak4CMulti_[ij],ak4NMultiplicity_[ij],ak4eta[ij])[1] for ij in range(nak4jet_)]
+                #ak4PassID_Calc = [jetID_(ak4CEmEF_[ij],ak4CHadEF_[ij],ak4NEmEF_[ij],ak4NHadEF_[ij],ak4CMulti_[ij],ak4NMultiplicity_[ij],ak4eta[ij])[1] for ij in range(nak4jet_)]
+                ak4PassID_Calc = ak4PassID_
+
 
             ak4_pt30_eta4p5_IDT  = [ ( (ak4pt[ij] > 30.0) and (abs(ak4eta[ij]) < 4.5) and (ak4PassID_Calc[ij] ) ) for ij in range(nak4jet_)]
 
