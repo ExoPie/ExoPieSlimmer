@@ -235,10 +235,15 @@ def runbbdm(txtfile):
     outTree.Branch( 'st_THINjetCHadEF',st_THINjetCHadEF )
 
     outTree.Branch( 'st_THINjetCEmEF',st_THINjetCEmEF )
+    # outTree.Branch( 'st_THINjetPhoEF',st_THINjetPhoEF )
+    # outTree.Branch( 'st_THINjetEleEF',st_THINjetEleEF )
+    # outTree.Branch( 'st_THINjetMuoEF',st_THINjetMuoEF )
     outTree.Branch( 'st_THINjetNEmEF',st_THINjetNEmEF )
     outTree.Branch( 'st_THINjetCMulti',st_THINjetCMulti )
     outTree.Branch( 'st_THINjetNMultiplicity',st_THINjetNMultiplicity )
     outTree.Branch('st_THINjetCorrUnc', st_THINjetCorrUnc)
+    outTree.Branch('st_THINbRegNNResolution', st_THINbRegNNResolution)
+    outTree.Branch('st_THINbRegNNCorr',  st_THINbRegNNCorr)
 
 
     outTree.Branch( 'st_nfjet',st_nfjet,'st_nfjet/L')
@@ -380,7 +385,7 @@ def runbbdm(txtfile):
                        df.HPSTau_n,df.HPSTau_Px,df.HPSTau_Py,df.HPSTau_Pz,df.HPSTau_Energy,df.disc_decayModeFinding,df.disc_byLooseIsolationMVArun2017v2DBoldDMwLT2017,df.disc_byMediumIsolationMVArun2017v2DBoldDMwLT2017,df.disc_byTightIsolationMVArun2017v2DBoldDMwLT2017,\
                        df.disc_againstMuonLoose3,df.disc_againstMuonTight3,df.disc_againstElectronLooseMVA6,df.disc_againstElectronMediumMVA6,df.disc_againstElectronTightMVA6,\
                        df.nGenPar,df.genParId,df.genMomParId,df.genParSt,df.genParPx,df.genParPy,df.genParPz,df.genParE,\
-                       df.THINnJet,df.THINjetPx,df.THINjetPy,df.THINjetPz,df.THINjetEnergy,\
+                       df.THINnJet,df.THINjetPx,df.THINjetPy,df.THINjetPz,df.THINjetEnergy,df.THINbRegNNResolution,df.THINbRegNNCorr,\
                        df.THINjetPassIDLoose,df.THINjetDeepCSV_b,df.THINjetHadronFlavor,df.THINjetCEmEF,df.THINjetCHadEF,df.THINjetNEmEF,df.THINjetNHadEF,df.THINjetCMulti,df.THINjetNMultiplicity,df.THINjetCorrUncUp,df.THINjetNPV, \
                        df.FATnJet, df.FATjetPx, df.FATjetPy, df.FATjetPz, df.FATjetEnergy, df.FATjetPassIDLoose,\
                        df.FATjet_DoubleSV, df.FATjet_probQCDb, df.FATjet_probHbb, df.FATjet_probQCDc, df.FATjet_probHcc, df.FATjet_probHbbc,\
@@ -397,7 +402,7 @@ def runbbdm(txtfile):
                        df.HPSTau_n,df.HPSTau_Px,df.HPSTau_Py,df.HPSTau_Pz,df.HPSTau_Energy,df.disc_decayModeFinding,df.disc_byLooseIsolationMVArun2017v2DBoldDMwLT2017,df.disc_byMediumIsolationMVArun2017v2DBoldDMwLT2017,df.disc_byTightIsolationMVArun2017v2DBoldDMwLT2017,\
                        df.disc_againstMuonLoose3,df.disc_againstMuonTight3,df.disc_againstElectronLooseMVA6,df.disc_againstElectronMediumMVA6,df.disc_againstElectronTightMVA6,\
                        df.nGenPar,df.genParId,df.genMomParId,df.genParSt,df.genParPx,df.genParPy,df.genParPz,df.genParE,\
-                       df.THINnJet,df.THINjetPx,df.THINjetPy,df.THINjetPz,df.THINjetEnergy,\
+                       df.THINnJet,df.THINjetPx,df.THINjetPy,df.THINjetPz,df.THINjetEnergy,df.THINbRegNNResolution,df.THINbRegNNCorr,\
                        df.THINjetPassIDTight,df.THINjetDeepCSV_b,df.THINjetHadronFlavor,df.THINjetCEmEF,df.THINjetCHadEF,df.THINjetNEmEF,df.THINjetNHadEF,df.THINjetCMulti,df.THINjetNMultiplicity,df.THINjetCorrUncUp,df.THINjetNPV, \
                        df.FATnJet, df.FATjetPx, df.FATjetPy, df.FATjetPz, df.FATjetEnergy, df.FATjetPassIDTight,\
                        df.FATjet_DoubleSV, df.FATjet_probQCDb, df.FATjet_probHbb, df.FATjet_probQCDc, df.FATjet_probHcc, df.FATjet_probHbbc,\
@@ -597,9 +602,8 @@ def runbbdm(txtfile):
             fatjeteta = [getEta(fatjetPx[ij], fatjetPy[ij], fatjetPz[ij]) for ij in range(fatnJet)]
             fatjetphi = [getPhi(fatjetPx[ij], fatjetPy[ij]) for ij in range(fatnJet)]
             SDMassCorrFact = [TheaCorrection(fatjetpt[ij],fatjeteta[ij]) for ij in range(fatnJet)]
-            if runOn2018:
-                fatjetPassID = [jetID_(fatCEmEF_[ij],fatCHadEF_[ij],fatNEmEF_[ij],fatNHadEF_[ij],fatCMulti_[ij],fatNMultiplicity_[ij],fatjeteta[ij])[0] for ij in range(fatnJet)]
-
+            #if runOn2018:
+            #    fatjetPassID = [jetID_(fatCEmEF_[ij],fatCHadEF_[ij],fatNEmEF_[ij],fatNHadEF_[ij],fatCMulti_[ij],fatNMultiplicity_[ij],fatjeteta[ij])[0] for ij in range(fatnJet)]
             fatjet_pt200_eta2p5_IDT  = [ ( (fatjetpt[ij] > 200.0) and (abs(fatjeteta[ij]) < 2.5) and (fatjetPassID[ij] ) ) for ij in range(fatnJet)]
 
             ##--- fat jet cleaning
@@ -651,6 +655,7 @@ def runbbdm(txtfile):
             tauCleanAgainstMu = []
             pass_tau_index_cleaned_DRBased = []
             if len(tau_eta2p3_iDLdm_pt18)>0:
+                DRCut = 0.4
                 tauCleanAgainstEle = anautil.jetcleaning(tau_eta2p3_iDLdm_pt18, ele_pt10_eta2p5_looseID,         taueta, eleeta, tauphi, elephi, DRCut)
                 tauCleanAgainstMu  = anautil.jetcleaning(tau_eta2p3_iDLdm_pt18, mu_pt10_eta2p4_looseID_looseISO, taueta, mueta,  tauphi, muphi,  DRCut)
                 tauCleaned = boolutil.logical_AND_List3(tau_eta2p3_iDLdm_pt18 , tauCleanAgainstEle, tauCleanAgainstMu)
@@ -686,11 +691,16 @@ def runbbdm(txtfile):
             st_THINjetCHadEF.clear()
 
             st_THINjetCEmEF.clear()
+            # st_THINjetPhoEF.clear()
+            # st_THINjetEleEF.clear()
+            # st_THINjetMuoEF.clear()
             st_THINjetNEmEF.clear()
             st_THINjetCMulti.clear()
             st_THINjetNMultiplicity.clear()
             st_THINjetCorrUnc.clear()
 
+            st_THINbRegNNResolution.clear()
+            st_THINbRegNNCorr.clear()
 
 
             st_fjetPx.clear()
@@ -768,12 +778,17 @@ def runbbdm(txtfile):
                 st_THINjetDeepCSV.push_back(ak4deepcsv_[ithinjet])
                 st_THINjetHadronFlavor.push_back(int(ak4flavor_[ithinjet]))
                 st_THINjetCEmEF.push_back(ak4CEmEF_[ithinjet])
+                # st_THINjetPhoEF.push_back(ak4PhEF_[ithinjet])
+                # st_THINjetEleEF.push_back(ak4EleEF_[ithinjet])
+                # st_THINjetMuoEF.push_back(ak4MuEF_[ithinjet])
                 st_THINjetCHadEF.push_back(ak4CHadEF_[ithinjet])
                 st_THINjetNEmEF.push_back(ak4NEmEF_[ithinjet])
                 st_THINjetNHadEF.push_back(ak4NHadEF_[ithinjet])
                 st_THINjetCMulti.push_back(ak4CMulti_[ithinjet])
                 st_THINjetNMultiplicity.push_back(ak4NMultiplicity_[ithinjet])
                 st_THINjetCorrUnc.push_back(ak4JEC_[ithinjet])
+                st_THINbRegNNResolution.push_back(ak4bRegNNResolution[ithinjet])
+                st_THINbRegNNCorr.push_back(ak4bRegNNCorr[ithinjet])
             if debug_:print 'njets: ',len(pass_jet_index_cleaned)
 
             st_nfjet[0] = len(pass_fatjet_index_cleaned)
