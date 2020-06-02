@@ -30,3 +30,4 @@ v04.00: * added prefiring weights for 2016 and 2017
 
 v06.00: * added event counter histogram
         * added all the missing variables for 2016
+        * removed the hightPt trigger for 2016 and 2018
