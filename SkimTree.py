@@ -543,7 +543,7 @@ def runbbdm(txtfile):
                 prefiringweight_, prefiringweightup_, prefiringweightdown_,\
                 pu_nTrueInt_, pu_nPUVert_,nVtx,\
                 trigName_, trigResult_, filterName, filterResult,\
-                met_smear, met_, metphi_, metUnc_,\
+                met_smear, type1met_, type1metphi_, metUnc_,\
                 metCorrSig, patCaloMETPt, patCaloMETPhi, TRKMETPt_, TRKMETPhi_, MetRawPt, MetRawPhi,\
                 nele_, elepx_, elepy_, elepz_, elee_, elevetoid_, elelooseid_, eletightid_, eleD0_, eleDz_,\
                 eleCharge_, npho_, phopx_, phopy_, phopz_, phoe_, pholooseid_, photightID_,\
@@ -625,6 +625,10 @@ def runbbdm(txtfile):
             if filterdecision == False and isData:
                 continue
 
+	    # MET xy-shift corrections
+            METXYCorr_Met_MetPhi = ROOT.METXYCorr_Met_MetPhi(type1met_, type1metphi_,int(run),int(args.year), not isData,int(nVtx))
+	    met_    = METXYCorr_Met_MetPhi[0]
+	    metphi_ = METXYCorr_Met_MetPhi[1]
             # ------------------------------------------------------
             ## PFMET Selection
             # --------------------------------------------------------
@@ -1065,8 +1069,6 @@ def runbbdm(txtfile):
                 if debug_:
                     print "pass_tau_index_cleaned_DRBased", pass_tau_index_cleaned_DRBased
 
-	    # MET xy-shift corrections
-            METXYCorr_Met_MetPhi = ROOT.METXYCorr_Met_MetPhi(met_, metphi_,int(run),int(args.year), not isData,int(nVtx))
 
 
             # -------------------------------------------------------------
@@ -1091,8 +1093,8 @@ def runbbdm(txtfile):
             st_filterstatus[0] = filterdecision
 
             st_pfMetSmearPt[0] = met_smear
-            st_pfMetCorrPt[0] = met_
-            st_pfMetCorrPhi[0] = metphi_
+            st_pfMetCorrPt[0] = type1met_
+            st_pfMetCorrPhi[0] = type1metphi_
             st_METXYCorr_Met[0] = METXYCorr_Met_MetPhi[0]
             st_METXYCorr_MetPhi[0] = METXYCorr_Met_MetPhi[1]
             st_pfMetCorrSig[0] = metCorrSig
