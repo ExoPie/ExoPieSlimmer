@@ -281,7 +281,10 @@ def runbbdm(txtfile):
     outTree.Branch('st_pfTRKMETPt', st_pfTRKMETPt, 'st_pfTRKMETPt/F')
     outTree.Branch('st_pfTRKMETPhi', st_pfTRKMETPhi, 'st_pfTRKMETPhi/F')
     outTree.Branch('st_pdfscaleSysWgtID', st_pdfscaleSysWgtID)
-    outTree.Branch('st_pdfscaleSysWeights', st_pdfscaleSysWeights)
+    outTree.Branch('st_scaleWeightUP', st_pdfWeightUP, 'st_pdfWeightUP/F')
+    outTree.Branch('st_scaleWeightDOWN', st_scaleWeightDOWN, 'st_scaleWeightDOWN/F')
+    outTree.Branch('st_pdfWeightUP', st_pdfWeightUP, 'st_pdfWeightUP/F')
+    outTree.Branch('st_pdfWeightDOWN', st_pdfWeightDOWN, 'st_pdfWeightDOWN/F')
     outTree.Branch('st_pfMetUncJetResUp', st_pfMetUncJetResUp)
     outTree.Branch('st_pfMetUncJetResDown', st_pfMetUncJetResDown)
     outTree.Branch('st_pfMetUncJetEnUp', st_pfMetUncJetEnUp)
@@ -1096,9 +1099,6 @@ def runbbdm(txtfile):
             st_pfTRKMETPt[0] = TRKMETPt_
             st_pfTRKMETPhi[0] = TRKMETPhi_
 
-            st_pdfscaleSysWgtID.clear()
-            st_pdfscaleSysWeights.clear()
-
             st_pfMetUncJetResUp.clear()
             st_pfMetUncJetResDown.clear()
 
@@ -1339,8 +1339,7 @@ def runbbdm(txtfile):
             if (samplename == 6) and ("SemiLeptonic" in outfilename):
                 if len(pass_fatjet_index_cleaned) > 0:
                     fjidx = pass_fatjet_index_cleaned[0]
-                    topmatchStr = GenPtProd.GenMatchTop(samplename, nGenPar_, genParId_, genMomParId_,
-                                                        genParSt_, genpx_, genpy_, genpz_, fatjetPx[fjidx], fatjetPy[fjidx], fatjetPz[fjidx])
+                    topmatchStr = GenPtProd.GenMatchTop(samplename, nGenPar_, genParId_, genMomParId_, genParSt_, genpx_, genpy_, genpz_, fatjetPx[fjidx], fatjetPy[fjidx], fatjetPz[fjidx])
             #print " topmatchStr for this event is ", topmatchStr
 
             st_TopMatching[0] = topmatchStr
@@ -1359,9 +1358,19 @@ def runbbdm(txtfile):
             #     st_genParEnergy.push_back(gene_[igp])
             if debug_:
                 print 'nGen: ', nGenPar_
-            for i in range(len(pdfscaleSysWgtID)):
-                st_pdfscaleSysWgtID.push_back(pdfscaleSysWgtID[i])
-                st_pdfscaleSysWeights.push_back(pdfscaleSysWeights[i])
+            
+            scale_temp = []
+            pdf_temp = []
+            for i in range(0,9):
+                scale_temp.append(pdfscaleSysWeights[i])
+            for i in range(9, len(pdfscaleSysWgtID)+1):
+                pdf_temp.apend(pdfscaleSysWeights[i])
+
+            st_scaleWeightUP[0] = max(scale_temp)
+            st_scaleWeightDOWN[0] = min(scale_temp)
+            st_pdfWeightUP[0] = max(pdf_temp)
+            st_pdfWeightDOWN[0] = min(pdf_temp)
+            
             st_pfMetUncJetResUp.push_back(metUnc_[0])
             st_pfMetUncJetResDown.push_back(metUnc_[1])
             st_pfMetUncJetEnUp.push_back(metUnc_[2])
