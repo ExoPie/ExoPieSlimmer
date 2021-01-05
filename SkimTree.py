@@ -280,8 +280,7 @@ def runbbdm(txtfile):
     outTree.Branch('st_pfpatCaloMETPhi', st_pfpatCaloMETPhi, 'st_pfpatCaloMETPhi/F')
     outTree.Branch('st_pfTRKMETPt', st_pfTRKMETPt, 'st_pfTRKMETPt/F')
     outTree.Branch('st_pfTRKMETPhi', st_pfTRKMETPhi, 'st_pfTRKMETPhi/F')
-    outTree.Branch('st_pdfscaleSysWgtID', st_pdfscaleSysWgtID)
-    outTree.Branch('st_scaleWeightUP', st_pdfWeightUP, 'st_pdfWeightUP/F')
+    outTree.Branch('st_scaleWeightUP', st_scaleWeightUP, 'st_scaleWeightUP/F')
     outTree.Branch('st_scaleWeightDOWN', st_scaleWeightDOWN, 'st_scaleWeightDOWN/F')
     outTree.Branch('st_pdfWeightUP', st_pdfWeightUP, 'st_pdfWeightUP/F')
     outTree.Branch('st_pdfWeightDOWN', st_pdfWeightDOWN, 'st_pdfWeightDOWN/F')
@@ -1363,14 +1362,14 @@ def runbbdm(txtfile):
             pdf_temp = []
             for i in range(0,9):
                 scale_temp.append(pdfscaleSysWeights[i])
-            for i in range(9, len(pdfscaleSysWgtID)+1):
-                pdf_temp.apend(pdfscaleSysWeights[i])
+            for i in range(9, len(pdfscaleSysWgtID)):
+                pdf_temp.append(pdfscaleSysWeights[i])
 
             st_scaleWeightUP[0] = max(scale_temp)
             st_scaleWeightDOWN[0] = min(scale_temp)
             st_pdfWeightUP[0] = max(pdf_temp)
             st_pdfWeightDOWN[0] = min(pdf_temp)
-            
+
             st_pfMetUncJetResUp.push_back(metUnc_[0])
             st_pfMetUncJetResDown.push_back(metUnc_[1])
             st_pfMetUncJetEnUp.push_back(metUnc_[2])
