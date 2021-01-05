@@ -280,6 +280,8 @@ def runbbdm(txtfile):
     outTree.Branch('st_pfpatCaloMETPhi', st_pfpatCaloMETPhi, 'st_pfpatCaloMETPhi/F')
     outTree.Branch('st_pfTRKMETPt', st_pfTRKMETPt, 'st_pfTRKMETPt/F')
     outTree.Branch('st_pfTRKMETPhi', st_pfTRKMETPhi, 'st_pfTRKMETPhi/F')
+    outTree.Branch('st_pdfscaleSysWgtID', st_pdfscaleSysWgtID)
+    outTree.Branch('st_pdfscaleSysWeights', st_pdfscaleSysWeights)
     outTree.Branch('st_pfMetUncJetResUp', st_pfMetUncJetResUp)
     outTree.Branch('st_pfMetUncJetResDown', st_pfMetUncJetResDown)
     outTree.Branch('st_pfMetUncJetEnUp', st_pfMetUncJetEnUp)
@@ -475,7 +477,7 @@ def runbbdm(txtfile):
             var_zip = zip(df.runId, df.lumiSection, df.eventId, df.isData, df.mcWeight, df.mass_A,df.mass_a,
                           df.prefiringweight, df.prefiringweightup, df.prefiringweightdown,
                           df.pu_nTrueInt, df.pu_nPUVert,
-                          df.hlt_trigName, df.hlt_trigResult, df.hlt_filterName, df.hlt_filterResult,
+                          df.hlt_trigName, df.hlt_trigResult, df.hlt_filterName, df.hlt_filterResult,df.pdfscaleSysWgtID_,df.pdfscaleSysWeights,
                           df.pfpatMet_smear, df.pfMetCorrPt, df.pfMetCorrPhi, df.pfMetCorrUnc,
                           df.pfMetCorrSig, df.pfpatCaloMETPt, df.pfpatCaloMETPhi, df.pfTRKMETPt_, df.pfTRKMETPhi_, df.pfMetRawPt, df.pfMetRawPhi,
                           df.nEle, df.elePx, df.elePy, df.elePz, df.eleEnergy, df.eleIsPassVeto, df.eleIsPassLoose, df.eleIsPassTight, df.eleD0, df.eleDz,
@@ -497,7 +499,7 @@ def runbbdm(txtfile):
             var_zip = zip(df.runId, df.lumiSection, df.eventId, df.isData, df.mcWeight, df.mass_A, df.mass_a,
                           df.prefiringweight, df.prefiringweightup, df.prefiringweightdown,
                           df.pu_nTrueInt, df.pu_nPUVert,
-                          df.hlt_trigName, df.hlt_trigResult, df.hlt_filterName, df.hlt_filterResult,
+                          df.hlt_trigName, df.hlt_trigResult, df.hlt_filterName, df.hlt_filterResult, df.pdfscaleSysWgtID_, df.pdfscaleSysWeights,
                           df.pfpatmodifiedMet_smear, df.pfmodifiedMetCorrPt, df.pfmodifiedMetCorrPhi, df.pfmodifiedMetCorrUnc,
                           df.pfmodifiedMetCorrSig, df.pfpatCaloMETPt, df.pfpatCaloMETPhi, df.pfTRKMETPt_, df.pfTRKMETPhi_, df.pfMetRawPt, df.pfMetRawPhi,
                           df.nEle, df.elePx, df.elePy, df.elePz, df.eleEnergy, df.eleIsPassVeto, df.eleIsPassLoose, df.eleIsPassTight, df.eleD0, df.eleDz,
@@ -522,7 +524,7 @@ def runbbdm(txtfile):
             var_zip = zip(df.runId, df.lumiSection, df.eventId, df.isData, df.mcWeight,df.mass_A,df.mass_a,
                           df.prefiringweight, df.prefiringweightup, df.prefiringweightdown,
                           df.pu_nTrueInt, df.pu_nPUVert,
-                          df.hlt_trigName, df.hlt_trigResult, df.hlt_filterName, df.hlt_filterResult,
+                          df.hlt_trigName, df.hlt_trigResult, df.hlt_filterName, df.hlt_filterResult, df.pdfscaleSysWgtID_, df.pdfscaleSysWeights,
                           df.pfpatMet_smear, df.pfMetCorrPt, df.pfMetCorrPhi, df.pfMetCorrUnc,
                           df.pfMetCorrSig, df.pfpatCaloMETPt, df.pfpatCaloMETPhi, df.pfTRKMETPt_, df.pfTRKMETPhi_, df.pfMetRawPt, df.pfMetRawPhi,
                           df.nEle, df.elePx, df.elePy, df.elePz, df.eleEnergy, df.eleIsPassVeto, df.eleIsPassLoose, df.eleIsPassTight, df.eleD0, df.eleDz,
@@ -540,7 +542,7 @@ def runbbdm(txtfile):
         for run, lumi, event, isData, mcWeight_, mass_A_, mass_a_,\
                 prefiringweight_, prefiringweightup_, prefiringweightdown_,\
                 pu_nTrueInt_, pu_nPUVert_,\
-                trigName_, trigResult_, filterName, filterResult,\
+                trigName_, trigResult_, filterName, filterResult,pdfscaleSysWgtID,pdfscaleSysWeights,\
                 met_smear, met_, metphi_, metUnc_,\
                 metCorrSig, patCaloMETPt, patCaloMETPhi, TRKMETPt_, TRKMETPhi_, MetRawPt, MetRawPhi,\
                 nele_, elepx_, elepy_, elepz_, elee_, elevetoid_, elelooseid_, eletightid_, eleD0_, eleDz_,\
@@ -1094,6 +1096,9 @@ def runbbdm(txtfile):
             st_pfTRKMETPt[0] = TRKMETPt_
             st_pfTRKMETPhi[0] = TRKMETPhi_
 
+            st_pdfscaleSysWgtID.clear()
+            st_pdfscaleSysWeights.clear()
+
             st_pfMetUncJetResUp.clear()
             st_pfMetUncJetResDown.clear()
 
@@ -1354,7 +1359,9 @@ def runbbdm(txtfile):
             #     st_genParEnergy.push_back(gene_[igp])
             if debug_:
                 print 'nGen: ', nGenPar_
-
+            for i in range(len(pdfscaleSysWgtID)):
+                st_pdfscaleSysWgtID.push_back(pdfscaleSysWgtID[i])
+                st_pdfscaleSysWeights.push_back(pdfscaleSysWeights[i])
             st_pfMetUncJetResUp.push_back(metUnc_[0])
             st_pfMetUncJetResDown.push_back(metUnc_[1])
             st_pfMetUncJetEnUp.push_back(metUnc_[2])

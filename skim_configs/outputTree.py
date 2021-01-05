@@ -53,6 +53,10 @@ st_pfpatCaloMETPt = array('f', [0.])
 st_pfpatCaloMETPhi = array('f', [0.])
 st_pfTRKMETPt = array('f', [0.])
 st_pfTRKMETPhi = array('f', [0.])
+
+st_pdfscaleSysWgtID = ROOT.std.vector('float')()
+st_pdfscaleSysWeights = ROOT.std.vector('float')()
+
 st_pfMetUncJetResUp = ROOT.std.vector('float')()
 st_pfMetUncJetResDown = ROOT.std.vector('float')()
 st_pfMetUncJetEnUp = ROOT.std.vector('float')()
