@@ -6,7 +6,7 @@ allvars2018 = ['runId',
 
                'pu_nTrueInt',
                'pu_nPUVert',
-
+	       'nVtx',
                'hlt_trigName',
                'hlt_trigResult',
                'hlt_filterName',
@@ -156,6 +156,7 @@ allvars2017 = ['runId',
 
                'pu_nTrueInt',
                'pu_nPUVert',
+	       'nVtx',
 
                'hlt_trigName',
                'hlt_trigResult',
@@ -308,7 +309,7 @@ allvars2016 = ['runId',
 
                'pu_nTrueInt',
                'pu_nPUVert',
-
+	       'nVtx',
                'hlt_trigName',
                'hlt_trigResult',
                'hlt_filterName',
