@@ -477,13 +477,8 @@ def runbbdm(txtfile):
             df['mass_a'] = 0
             var_zip = zip(df.runId, df.lumiSection, df.eventId, df.isData, df.mcWeight, df.mass_A,df.mass_a,
                           df.prefiringweight, df.prefiringweightup, df.prefiringweightdown,
-<<<<<<< HEAD
-                          df.pu_nTrueInt, df.pu_nPUVert,
+                          df.pu_nTrueInt, df.pu_nPUVert, df.nVtx,
                           df.hlt_trigName, df.hlt_trigResult, df.hlt_filterName, df.hlt_filterResult,df.pdfscaleSysWgtID_,df.pdfscaleSysWeights,
-=======
-                          df.pu_nTrueInt, df.pu_nPUVert,df.nVtx,
-                          df.hlt_trigName, df.hlt_trigResult, df.hlt_filterName, df.hlt_filterResult,
->>>>>>> upstream/Skim_V0_2017Only
                           df.pfpatMet_smear, df.pfMetCorrPt, df.pfMetCorrPhi, df.pfMetCorrUnc,
                           df.pfMetCorrSig, df.pfpatCaloMETPt, df.pfpatCaloMETPhi, df.pfTRKMETPt_, df.pfTRKMETPhi_, df.pfMetRawPt, df.pfMetRawPhi,
                           df.nEle, df.elePx, df.elePy, df.elePz, df.eleEnergy, df.eleIsPassVeto, df.eleIsPassLoose, df.eleIsPassTight, df.eleD0, df.eleDz,
@@ -504,13 +499,8 @@ def runbbdm(txtfile):
                 df['mass_a'] = 0
             var_zip = zip(df.runId, df.lumiSection, df.eventId, df.isData, df.mcWeight, df.mass_A, df.mass_a,
                           df.prefiringweight, df.prefiringweightup, df.prefiringweightdown,
-<<<<<<< HEAD
-                          df.pu_nTrueInt, df.pu_nPUVert,
+                          df.pu_nTrueInt, df.pu_nPUVert, df.nVtx,
                           df.hlt_trigName, df.hlt_trigResult, df.hlt_filterName, df.hlt_filterResult, df.pdfscaleSysWgtID_, df.pdfscaleSysWeights,
-=======
-                          df.pu_nTrueInt, df.pu_nPUVert,df.nVtx,
-                          df.hlt_trigName, df.hlt_trigResult, df.hlt_filterName, df.hlt_filterResult,
->>>>>>> upstream/Skim_V0_2017Only
                           df.pfpatmodifiedMet_smear, df.pfmodifiedMetCorrPt, df.pfmodifiedMetCorrPhi, df.pfmodifiedMetCorrUnc,
                           df.pfmodifiedMetCorrSig, df.pfpatCaloMETPt, df.pfpatCaloMETPhi, df.pfTRKMETPt_, df.pfTRKMETPhi_, df.pfMetRawPt, df.pfMetRawPhi,
                           df.nEle, df.elePx, df.elePy, df.elePz, df.eleEnergy, df.eleIsPassVeto, df.eleIsPassLoose, df.eleIsPassTight, df.eleD0, df.eleDz,
@@ -534,13 +524,8 @@ def runbbdm(txtfile):
             df['prefiringweightdown'] = 1.0
             var_zip = zip(df.runId, df.lumiSection, df.eventId, df.isData, df.mcWeight,df.mass_A,df.mass_a,
                           df.prefiringweight, df.prefiringweightup, df.prefiringweightdown,
-<<<<<<< HEAD
-                          df.pu_nTrueInt, df.pu_nPUVert,
+                          df.pu_nTrueInt, df.pu_nPUVert, df.nVtx,
                           df.hlt_trigName, df.hlt_trigResult, df.hlt_filterName, df.hlt_filterResult, df.pdfscaleSysWgtID_, df.pdfscaleSysWeights,
-=======
-                          df.pu_nTrueInt, df.pu_nPUVert,df.nVtx,
-                          df.hlt_trigName, df.hlt_trigResult, df.hlt_filterName, df.hlt_filterResult,
->>>>>>> upstream/Skim_V0_2017Only
                           df.pfpatMet_smear, df.pfMetCorrPt, df.pfMetCorrPhi, df.pfMetCorrUnc,
                           df.pfMetCorrSig, df.pfpatCaloMETPt, df.pfpatCaloMETPhi, df.pfTRKMETPt_, df.pfTRKMETPhi_, df.pfMetRawPt, df.pfMetRawPhi,
                           df.nEle, df.elePx, df.elePy, df.elePz, df.eleEnergy, df.eleIsPassVeto, df.eleIsPassLoose, df.eleIsPassTight, df.eleD0, df.eleDz,
@@ -557,15 +542,9 @@ def runbbdm(txtfile):
                           df.FATjetSDmass, df.FATN2_Beta1_, df.FATN2_Beta2_, df.FATjetCHSPRmassL2L3Corr, df.FATjetCHSSDmassL2L3Corr, df.FATjetTau1, df.FATjetTau2)
         for run, lumi, event, isData, mcWeight_, mass_A_, mass_a_,\
                 prefiringweight_, prefiringweightup_, prefiringweightdown_,\
-<<<<<<< HEAD
-                pu_nTrueInt_, pu_nPUVert_,\
-                trigName_, trigResult_, filterName, filterResult,pdfscaleSysWgtID,pdfscaleSysWeights,\
-                met_smear, met_, metphi_, metUnc_,\
-=======
                 pu_nTrueInt_, pu_nPUVert_,nVtx,\
-                trigName_, trigResult_, filterName, filterResult,\
+                trigName_, trigResult_, filterName, filterResult, pdfscaleSysWgtID, pdfscaleSysWeights,\
                 met_smear, type1met_, type1metphi_, metUnc_,\
->>>>>>> upstream/Skim_V0_2017Only
                 metCorrSig, patCaloMETPt, patCaloMETPhi, TRKMETPt_, TRKMETPhi_, MetRawPt, MetRawPhi,\
                 nele_, elepx_, elepy_, elepz_, elee_, elevetoid_, elelooseid_, eletightid_, eleD0_, eleDz_,\
                 eleCharge_, npho_, phopx_, phopy_, phopz_, phoe_, pholooseid_, photightID_,\
