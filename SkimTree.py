@@ -1071,7 +1071,6 @@ def runbbdm(txtfile):
                     print "pass_tau_index_cleaned_DRBased", pass_tau_index_cleaned_DRBased
 
 
-
             # -------------------------------------------------------------
             st_runId[0] = long(run)
             st_lumiSection[0] = lumi
@@ -1196,7 +1195,8 @@ def runbbdm(txtfile):
             # st_genParPy.clear()
             # st_genParPz.clear()
             # st_genParEnergy.clear()
-	   # st_METXYCorr_Met_MetPhi.clear()
+            # st_METXYCorr_Met_MetPhi.clear()
+            # st_METXYCorr_Met_MetPhi.clear()
             st_genParPt.clear()
             st_genParSample.clear()
 
@@ -1359,13 +1359,17 @@ def runbbdm(txtfile):
             #     st_genParEnergy.push_back(gene_[igp])
             if debug_:
                 print 'nGen: ', nGenPar_
-            
+
             scale_temp = []
             pdf_temp = []
-            for i in range(0,9):
-                scale_temp.append(pdfscaleSysWeights[i])
-            for i in range(9, len(pdfscaleSysWgtID)):
-                pdf_temp.append(pdfscaleSysWeights[i])
+            if len(pdfscaleSysWgtID) > 0:
+                for i in range(0,9):
+                    scale_temp.append(pdfscaleSysWeights[i])
+                for i in range(9, len(pdfscaleSysWgtID)):
+                    pdf_temp.append(pdfscaleSysWeights[i])
+            else:
+                scale_temp.append(1.0)
+                pdf_temp.append(1.0)
 
             st_scaleWeightUP[0] = max(scale_temp)
             st_scaleWeightDOWN[0] = min(scale_temp)
@@ -1388,8 +1392,6 @@ def runbbdm(txtfile):
     print "output written to ", outfilename
     end = time.clock()
     print "%.4gs" % (end-start)
-
-#files=["/eos/cms//store/group/phys_exotica/bbMET/ExoPieElementTuples/MC_2017miniaodV2_V1/WplusH_HToBB_WToLNu_M125_13TeV_powheg_pythia8/DYJetsToLL_M_50_HT_400to600_TuneCP5_13TeV_30K/190825_203128/0000/ExoPieElementTuples_1.root", "/eos/cms//store/group/phys_exotica/bbMET/ExoPieElementTuples/MC_2017miniaodV2_V1/WplusH_HToBB_WToLNu_M125_13TeV_powheg_pythia8/DYJetsToLL_M_50_HT_400to600_TuneCP5_13TeV_30K/190825_203128/0000/ExoPieElementTuples_2.root"]
 
 
 if __name__ == '__main__':
